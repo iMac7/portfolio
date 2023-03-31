@@ -1,4 +1,4 @@
-import React from 'react'
+import { RandomizedLight } from '@react-three/drei'
 
 function Lights() {
   return (
@@ -25,7 +25,7 @@ function Lights() {
 
         <ambientLight intensity={1} color={'#ffffff'}/>
 
-
+        {/* <RandomizedLight castShadow amount={8} frames={100} position={[5, 5, -10]} /> */}
 
     </>
     )
