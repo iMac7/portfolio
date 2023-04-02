@@ -4,7 +4,7 @@ import { useFrame, useLoader } from "@react-three/fiber"
 import {vertexShader, fragmentShader} from '../../public/shaders'
 
 
-export default function Flag() {
+export default function Flag({position}) {
     const flagTexture = useLoader(TextureLoader, '/textures/kenya.png')
 
     const meshRef = useRef()
@@ -16,8 +16,8 @@ export default function Flag() {
 
   return (
     <>
-        <mesh position={[3,15,-15]} ref={meshRef} >
-         <planeGeometry args={[4,2.5,10,10]}/>
+        <mesh position={position} rotation={[0,Math.PI*.2,0]} ref={meshRef} >
+         <planeGeometry args={[15,15,20,20]}/>
          <rawShaderMaterial
           uniforms={{
             uTexture: {value: flagTexture},
