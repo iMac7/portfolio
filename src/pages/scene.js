@@ -5,13 +5,13 @@ import Effects from '@/components/Effects'
 import Lights from '@/components/Lights'
 import Meshes from '@/components/Meshes'
 import Cameras from '@/components/Cameras'
-import Environment from '@/components/MyEnvironment'
+import Environment from '@/components/Environment'
 
 export default function Scene() {
 
   return (
     <Suspense fallback={null}>
-      <Canvas shadows  style={{background:"black", height: '100vh'}} >
+      <Canvas shadows  style={{background:"black", height: '100vh'}}  >
 
         <axesHelper args={[40]}/>
         <OrbitControls />

@@ -20,12 +20,26 @@ function Meshes() {
     <>
 
         //Diamond
-        <mesh position={[0,0,0]} castShadow ref={diamondRef} geometry={nodes.Diamond_1_0.geometry}>
-            <MeshRefractionMaterial wireframe={false} envMap={worldTexture} toneMapped={false} color={[1,4,1]} />
+        <mesh position={[0,0,0]} ref={diamondRef} geometry={nodes.Diamond_1_0.geometry} scale={[5,5,5]}>
+            <MeshRefractionMaterial wireframe={false} envMap={worldTexture} toneMapped={false}
+            //  color={[1,1,4]}
+              />
         </mesh>
 
 
-        //intro
+        //INTRO PANEL
+        <mesh position={[-60,-10,-90]} rotation={[0,Math.PI*.2,0]}>
+            <planeGeometry args={[100,150,10,10]}/>
+            <MeshReflectorMaterial
+            color={'black'}
+            // emissive={'red'}
+            side={DoubleSide}
+            transparent
+            opacity={.5}
+            blur={.5}
+             />
+        </mesh>
+
         {/* <Image 
          url="/images/me.jpg"
          grayscale={1}
@@ -35,30 +49,91 @@ function Meshes() {
          scale={10} 
          onClick={()=>console.log('clicked')} /> */}
 
-        <Text color={new Color(1000,1000,1000)} position={[3,4,3]} >
-            hello world
+        <Text color={new Color(100,1,1)} position={[-60,-10,-88]} fontSize={5} rotation={[0,Math.PI*.2,0]}>
+            NAME &nbsp;:&nbsp; ME
+            {'\n'}
+            {'\n'}SPECIALTY : WEB DEVELOPMENT
+        </Text>
+
+        {/* <Flag /> */}
+
+
+
+
+
+
+
+         //BESIDE BED
+        <mesh position={[130,-10,50]} rotation={[0,Math.PI*-.6,0]}>
+          <planeGeometry args={[140,200,10,10]}/>
+          <MeshReflectorMaterial
+          color={'black'}
+          emissive={'black'}
+          side={DoubleSide}
+          transparent
+          opacity={.9}
+            />
+        </mesh>
+
+        <Text color={new Color(100,1,1)} position={[129,-10,50]} rotation={[0,Math.PI*-.6,0]} fontSize={5}>
+            NAME &nbsp;:&nbsp; ME
+            {'\n'}
+            {'\n'}SPECIALTY : WEB DEVELOPMENT
         </Text>
 
 
 
-        {/* <MyText /> */}
 
-        {/* <GlowingText /> */}
 
-        {/* <fog attach="fog" args={["#ffffff", 75, 80]} /> */}
 
-        {/* <Flag /> */}
 
-        {/* <mesh position={[0,10,-30]}>
-            <planeGeometry args={[20,20,10,10]}/>
+         //ON BED
+        <mesh position={[-30,-50,130]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.13]}>
+            <planeGeometry args={[130,80,10,10]}/>
             <MeshReflectorMaterial
-            color={[1,1,0]}
-            emissive={'red'}
+            color={'black'}
+            emissive={'black'}
             side={DoubleSide}
             transparent
-            opacity={.5}
+            opacity={.9}
              />
-        </mesh> */}
+        </mesh>
+
+        <Text color={new Color(100,1,1)} position={[-30,-49,130]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.13]} fontSize={5}>
+            NAME &nbsp;:&nbsp; ME
+            {'\n'}
+            {'\n'}SPECIALTY : WEB DEVELOPMENT
+        </Text>
+
+
+
+
+
+
+
+
+
+
+
+         //CEILING
+        <mesh position={[0,100,-10]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.3]}>
+            <planeGeometry args={[170,150,10,10]}/>
+            <MeshReflectorMaterial
+            color={'black'}
+            emissive={'black'}
+            side={DoubleSide}
+            transparent
+            opacity={.9}
+             />
+        </mesh>
+
+        <Text color={new Color(100,1,1)} position={[0,99,-10]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.3]} fontSize={5}>
+            NAME &nbsp;:&nbsp; ME
+            {'\n'}
+            {'\n'}SPECIALTY : WEB DEVELOPMENT
+        </Text>
+
+
 
 
 
@@ -77,7 +152,7 @@ function Meshes() {
           <meshStandardMaterial color={'black'} transparent opacity={.9}/>
         </mesh> */}
 
-        <mesh castShadow receiveShadow rotation-x={-Math.PI * .5} position={[0,-5,0]}>
+        {/* <mesh castShadow receiveShadow rotation-x={-Math.PI * .5} position={[0,-10,0]}>
           <planeGeometry args={[30, 30, 10, 10]} />
           <MeshReflectorMaterial
             side={DoubleSide}
@@ -98,7 +173,7 @@ function Meshes() {
             debug={0}
             // wireframe={true}
             />
-        </mesh>
+        </mesh> */}
 
         {/* <Sparkles
         count={1000}

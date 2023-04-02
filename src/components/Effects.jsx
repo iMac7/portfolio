@@ -1,6 +1,6 @@
 import { Circle } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
-import { EffectComposer, Noise, Vignette, HueSaturation, GodRays, Bloom, UnrealBloomPass, Scanline } from '@react-three/postprocessing'
+import { EffectComposer, Noise, Vignette, HueSaturation, GodRays, Bloom, UnrealBloomPass, Scanline, Outline } from '@react-three/postprocessing'
 import { BlendFunction, BlurPass, Resizer, KernelSize } from 'postprocessing'
 import React, { Suspense, forwardRef, useState, useRef, useMemo, useEffect } from 'react'
 import { Mesh, Vector2 } from 'three'
@@ -22,7 +22,6 @@ export default function Effects() {
           luminanceThreshold={0.9} // luminance threshold. Raise this value to mask out darker elements in the scene.
           luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
         />
-
 
 
 
