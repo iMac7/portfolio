@@ -5,8 +5,7 @@ import Effects from '@/components/Effects'
 import Lights from '@/components/Lights'
 import Meshes from '@/components/Meshes'
 import Cameras from '@/components/Cameras'
-import MyEnvironment from '@/components/MyEnvironment'
-
+import Environment from '@/components/MyEnvironment'
 
 export default function Scene() {
 
@@ -16,7 +15,7 @@ export default function Scene() {
 
         <axesHelper args={[40]}/>
         <OrbitControls />
-        <MyEnvironment />
+        <Environment />
         <Lights />
         <Cameras />
         <Effects />
@@ -26,6 +25,3 @@ export default function Scene() {
     </Suspense>
   )
 }
-
-
-

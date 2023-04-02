@@ -1,6 +1,5 @@
 import { useRef } from "react"
-import { DoubleSide } from "three"
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader'
+import { DoubleSide, TextureLoader, MeshBasicMaterial, Color, MeshStandardMaterial } from "three"
 import { MeshReflectorMaterial, Stars, useGLTF, MeshRefractionMaterial, Image, Text } from "@react-three/drei"
 import { useFrame, useLoader } from "@react-three/fiber"
 import Flag from "./Flag"
@@ -9,7 +8,7 @@ import Flag from "./Flag"
 function Meshes() {
     const diamondRef = useRef()
     const { nodes } = useGLTF('/models/diamond.glb')
-    const envMapTexture = useLoader(RGBELoader, '/envMaps/night.hdr')
+    const worldTexture = useLoader(TextureLoader, '/envMaps/room.jpg')
 
 
     useFrame(state => {
@@ -19,9 +18,10 @@ function Meshes() {
 
   return (
     <>
+
         //Diamond
         <mesh position={[0,0,0]} castShadow ref={diamondRef} geometry={nodes.Diamond_1_0.geometry}>
-            <MeshRefractionMaterial wireframe={true} envMap={envMapTexture} toneMapped={false} />
+            <MeshRefractionMaterial wireframe={false} envMap={worldTexture} toneMapped={false} color={[1,4,1]} />
         </mesh>
 
 
@@ -35,24 +35,37 @@ function Meshes() {
          scale={10} 
          onClick={()=>console.log('clicked')} /> */}
 
-        <Text color={'white'} position={[3,18,-15]} >
+        <Text color={new Color(1000,1000,1000)} position={[3,4,3]} >
             hello world
         </Text>
 
-        <Flag />
 
-        <mesh position={[0,10,-16]}>
+
+        {/* <MyText /> */}
+
+        {/* <GlowingText /> */}
+
+        {/* <fog attach="fog" args={["#ffffff", 75, 80]} /> */}
+
+        {/* <Flag /> */}
+
+        {/* <mesh position={[0,10,-30]}>
             <planeGeometry args={[20,20,10,10]}/>
             <MeshReflectorMaterial
-            color={'darkblue'}
+            color={[1,1,0]}
+            emissive={'red'}
             side={DoubleSide}
             transparent
             opacity={.5}
              />
-        </mesh>
+        </mesh> */}
 
 
 
+        {/* <mesh position={[0,4,0]}>
+        <boxGeometry args={[1, 1, 1]} />
+        <meshStandardMaterial color={[100,1,1]} emissive={'hotpink'} />
+        </mesh> */}
 
 
 
@@ -83,7 +96,7 @@ function Meshes() {
             depthToBlurRatioBias={.25}
             reflectorOffset={.2}
             debug={0}
-            wireframe={true}
+            // wireframe={true}
             />
         </mesh>
 
@@ -95,8 +108,6 @@ function Meshes() {
         scale={100}
         color={[255,255,0]}
          /> */}
-
-        <Stars radius={100} depth={50} count={500} factor={4} saturation={0} fade speed={1} />
 
     </>
   )

@@ -1,12 +1,10 @@
-import { RandomizedLight } from '@react-three/drei'
-
 function Lights() {
   return (
     <>
         <spotLight 
         position={[0, 9, 0]}
         color={'skyblue'}
-        intensity={1}
+        intensity={2}
         angle={3}
         penumbra={.5}
         castShadow
@@ -24,8 +22,6 @@ function Lights() {
         />
 
         <ambientLight intensity={1} color={'#ffffff'}/>
-
-        {/* <RandomizedLight castShadow amount={8} frames={100} position={[5, 5, -10]} /> */}
 
     </>
     )

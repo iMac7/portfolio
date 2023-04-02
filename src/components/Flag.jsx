@@ -23,7 +23,7 @@ export default function Flag() {
             uTexture: {value: flagTexture},
             uFrequency: {value: new Vector2(10, 5)},
             uTime: {value: 0},  
-        }}
+          }}
           vertexShader={vertexShader}
           fragmentShader={fragmentShader}
          

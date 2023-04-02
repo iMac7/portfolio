@@ -1,8 +1,14 @@
-import { Environment } from '@react-three/drei'
-import React from 'react'
+import { useLoader } from '@react-three/fiber'
+import { BackSide, TextureLoader } from 'three'
 
-export default function MyEnvironment() {
+export default function Environment() {
+  const worldTexture = useLoader(TextureLoader, '/envMaps/room.jpg')
+  
   return (
-    <Environment files={'/envMaps/night.hdr'} background blur={0} />
+      <mesh>
+            <sphereGeometry args={[100]} scale={[-1,1,1]} />
+            <meshBasicMaterial map={worldTexture} side={BackSide} />
+      </mesh>
+
     )
 }
