@@ -17,7 +17,7 @@ export default function Flag({position}) {
   return (
     <>
         <mesh position={position} rotation={[0,Math.PI*.2,0]} ref={meshRef} >
-         <planeGeometry args={[15,15,20,20]}/>
+         <planeGeometry args={[15,10,20,20]}/>
          <rawShaderMaterial
           uniforms={{
             uTexture: {value: flagTexture},

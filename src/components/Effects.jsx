@@ -13,15 +13,15 @@ export default function Effects() {
 
         <EffectComposer multisampling={0}>
 
-        {/* <Bloom
+        <Bloom
           intensity={1.0} // The bloom intensity.
           blurPass={undefined} // A blur pass.
           width={Resizer.AUTO_SIZE} // render width
           height={Resizer.AUTO_SIZE} // render height
           kernelSize={KernelSize.MEDIUM} // blur kernel size
-          luminanceThreshold={.9} // luminance threshold. Raise this value to mask out darker elements in the scene.
+          luminanceThreshold={1} // luminance threshold. Raise this value to mask out darker elements in the scene.
           luminanceSmoothing={0.025} // smoothness of the luminance threshold. Range is [0, 1]
-        /> */}
+        />
 
 
 
