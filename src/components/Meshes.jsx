@@ -44,25 +44,23 @@ function Meshes() {
         </mesh> */}
 
 
-        {/* <Image 
-         url="/images/me.jpg"
-         grayscale={1}
+        <Image 
+         url="/images/me.png"
+        position={[-60,20,-87]} rotation={[0,Math.PI*.2,0]} 
+         scale={91}
          transparent
-         opacity={0}
-         position={[-9,6,-15]} 
-         scale={10} 
-         onClick={()=>console.log('clicked')} /> */}
+         onClick={()=>console.log('clicked')} />
 
         <Text 
         color={new Color(10,100,10)}
          position={[-60,-50,-80]} fontSize={5} rotation={[0,Math.PI*.2,0]}
         material={new MeshStandardMaterial()}
         >
-            NAME &nbsp;:&nbsp; ME
+            NAME &nbsp;:&nbsp; IAN MACHARIA
             {'\n'}
             {'\n'}SPECIALTY : WEB DEVELOPMENT
             {'\n'}
-            {'\n'}LANGUAGES : ENGLISH, SWAHILI,GERMAN
+            {'\n'}LANGUAGES : ENGLISH , SWAHILI , GERMAN
         </Text>
 
         {/* <Flag position={[-40,-25,-86]}/> */}
@@ -71,7 +69,7 @@ function Meshes() {
 
 
 
-
+        //CONTACT DETAILS
         <mesh position={[50,-10,-70]} rotation={[0,Math.PI*-.2,0]}>
           <planeGeometry args={[80,30,10,10]}/>
           <meshStandardMaterial
@@ -121,7 +119,7 @@ function Meshes() {
 
         <mesh position={[-47,10,124]} rotation={[Math.PI*0,Math.PI*-0.1,Math.PI*0]}>
             <planeGeometry args={[75,115,10,10]}/>
-            <meshStandardMaterial color={[.1,0,.1]}transparent opacity={.9} side={DoubleSide}  />
+            <meshStandardMaterial color={[0,.1,9]} toneMapped={false} transparent opacity={.9} side={DoubleSide}  />
         </mesh>
 
         <Text color={new Color(1000,0,0)} position={[-50,50,120]} rotation={[Math.PI*0,Math.PI*.9,Math.PI*0]} fontSize={9}>
@@ -153,7 +151,7 @@ function Meshes() {
 
 
 
-         //CEILING
+         //INTERESTS
         {/* <mesh position={[0,100,-10]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.3]}>
             <planeGeometry args={[130,150,10,10]}/>
             <MeshReflectorMaterial
@@ -177,7 +175,17 @@ function Meshes() {
 
         </mesh> */}
 
-        
+        <Image 
+        url="/images/arsenal.png"
+        position={[0,100,-10]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.3]}
+        scale={91}
+        // color={'darkgray'}
+        grayscale={.8}
+        transparent
+        opacity={.2}
+        onClick={()=>console.log('clicked')} />
+
+
         <Text color={new Color(100,0,1)} emissive={'purple'} position={[-70,99,20]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.3]} fontSize={8}>
           OTHER INTERESTS
         </Text>
