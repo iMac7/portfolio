@@ -1,8 +1,8 @@
-import React from 'react'
+import Projects from '@/components/Projects/Projects'
 
 function projects() {
   return (
-    <div>projects</div>
+    <Projects />
   )
 }
 

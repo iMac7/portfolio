@@ -1,6 +1,5 @@
 
 .outer {
-    /* border: 2px solid white; */
     position: fixed;
     inset: 0;
     display: flex;
@@ -13,18 +12,23 @@
     max-width: 450px;
     /* height: 600px; */
     border: 2px solid white;
-    background-color: black;
+    /* background-color: black; */
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 4rem .5rem;
+    background: linear-gradient(to right bottom, black 49%, white 50%, black 51%);
+    background-size: 200% 200%;
+    background-position: 99% 99%;
+    transition: 300ms;
+    
 }
 
 .header {
     color: rgb(10, 227, 238);
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
 }
 
@@ -47,11 +51,6 @@
     padding: .2rem;
     background: none;
 }
-
-/* .svg {
-    min-width: 1rem;
-    height: 3rem;
-} */
 
 .mid {
     flex-grow: 1;
@@ -82,11 +81,9 @@
 }
 
 .contact button {
-    /* background-color: black; */
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: 2px solid red; */
     border: none;
     border-radius: 10px;
     padding: 1rem .2rem;
@@ -103,3 +100,15 @@
 }
 
 
+
+/* @keyframes moveGradient {
+    from {background-position: left;}
+    to {background-position: right;}
+}
+  
+.gradient {
+    height: 30px;
+    background: linear-gradient(to bottom right, red, transparent);
+    background-size: 400% 400%;
+    animation: moveGradient 1s linear infinite;
+} */
