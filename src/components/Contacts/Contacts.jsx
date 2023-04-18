@@ -84,7 +84,7 @@ function Contacts() {
           {link.icon}
 
           <div className={styles.mid}>
-            <div>{link.name}</div>
+            <span>{link.name}</span>
             <input type="text" value={link.linkText} readOnly />
           </div>
           

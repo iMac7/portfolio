@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import styles from './Terminal.module.css' 
 
 function Terminal() {
-  const [text, setText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
-  const message = 'whoami';
+  const [text, setText] = useState('')
+  const [isTyping, setIsTyping] = useState(true)
+  const message = 'whoami'
 
   useEffect(() => {
     const interval = setInterval(() => {

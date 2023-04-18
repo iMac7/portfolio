@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom, black, rgb(77, 77, 77))
+    background: linear-gradient(to bottom, white, rgb(77, 77, 77))
 }
 
 .terminal {
@@ -12,6 +12,7 @@
     min-width: 350px;
     height: max(300px, 70vh);
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .head {

@@ -1,50 +1,44 @@
 import { Suspense, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Sky, Trail } from '@react-three/drei'
 import Effects from '@/components/Effects'
 import Lights from '@/components/Lights'
 import Meshes from '@/components/Meshes'
 import Cameras from '@/components/Cameras'
 import Environment from '@/components/Environment'
-import { Color, DoubleSide, Vector2, Vector3 } from 'three'
+import { Color, DoubleSide, Raycaster, Vector2, Vector3 } from 'three'
+import {useSpring, animated, config} from '@react-spring/three'
+// import { useControls } from 'leva'
 
 
-function Plane() {
+function MyMesh() {
   const meshRef = useRef()
+  const [active, setActive] = useState(false);
+  const { scale } = useSpring({
+    scale: active ? 1.5 : 1,
+    config: config.wobbly
+  });
+
+  // const {myvalue} = useControls({myvalue:5})
+
 
   return (
-    <mesh>
-      <planeGeometry attach="geometry" args={[10, 10]} />
-      <shaderMaterial
-        ref={meshRef}
-        attach="material"
-        side={DoubleSide}
-        uniforms={{
-          color: { value: new Color('white') },
-          circleCenter: { value: new Vector3() },
-          circleRadius: { value: 0 },
-        }}
-        vertexShader={`
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-          }
-        `}
-        fragmentShader={`
-          uniform vec3 color;
-          uniform vec3 circleCenter;
-          uniform float circleRadius;
-          varying vec2 vUv;
-          void main() {
-            float distance = length(gl_FragCoord.xyz - circleCenter);
-            float insideCircle = step(distance, circleRadius);
-            vec3 circleColor = mix(color, vec3(1.0, 1.0, 0.0), insideCircle);
-            gl_FragColor = vec4(circleColor, 1.0);
-          }
-        `}
-      />
-    </mesh>
+    <>
+    <animated.mesh 
+    position={[0,0,0]}
+    scale={scale} 
+    onClick={() => setActive(!active)}
+    ref={meshRef} 
+    >
+      <boxGeometry args={[1,1,1]} />
+      <meshStandardMaterial color={'gray'}/>
+    </animated.mesh>
+
+
+    {console.log('active- ', active, 'scale- ', scale)}
+
+    </>
+
   )
 }
 
@@ -53,20 +47,20 @@ function Plane() {
 export default function Scene() {
 
 
-
   return (
     <Suspense fallback={null}>
-      <Canvas shadows  style={{background:"black", height: '100vh'}}  >
+      <Canvas shadows  style={{background:"black", height: '100vh'}} frameloop='demand' >
 
-        <axesHelper args={[40]}/>
+        <axesHelper args={[1.5]}/>
         <OrbitControls />
         <Environment />
         <Lights />
         <Cameras />
         <Effects />
         <Meshes />
-      
-        {/* <Plane /> */}
+
+        {/* <MyMesh /> */}
+
 
       </Canvas>
     </Suspense>
