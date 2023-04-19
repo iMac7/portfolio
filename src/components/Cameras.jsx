@@ -6,7 +6,7 @@ function Cameras() {
   const [zoom, setZoom] = useState(1)
 
   useEffect(() => {
-    console.log(window.innerWidth, window.innerHeight)
+    // console.log(window.innerWidth, window.innerHeight)
     if(window.innerWidth < 1000){
       //because the site will support from 300px+ device widths, any less and that's not a smartphone lmao
       setZoom((window.innerWidth/700)*.5 + .5)

@@ -7,7 +7,6 @@ import { useSpring, animated, config} from '@react-spring/three'
 function Meshes() {
     const diamondRef = useRef()
     const { nodes } = useGLTF('/models/diamond.glb')
-    const worldTexture = useLoader(TextureLoader, '/envMaps/room.jpg')
 
     const [text, setText] = useState('');
     const [isTyping, setIsTyping] = useState(true);
@@ -16,7 +15,7 @@ function Meshes() {
     const [opacity, setOpacity] = useState(0)
       
     // useFrame(state => {
-      //     diamondRef.current.rotation.y += .01
+          // diamondRef.current.rotation.y += .01
       // })
       
 
@@ -37,12 +36,6 @@ function Meshes() {
       
     }, [isTyping]);
     
-    const materialRef = useRef()
-
-
-
-    const meshRef = useRef()
-    const groupRef = useRef()
 
     const introRef = useRef()
     const contactsRef = useRef()
@@ -51,12 +44,31 @@ function Meshes() {
     const skillsRef = useRef()
 
 
-    const raycaster = new Raycaster()
-    const [intersecting, setIntersecting] = useState(false)
-    // const intro = useSpring({
-    //   scale: intersecting? 1.3 : 1
-    // })
-    const [spring, setSpring] = useSpring(() => ({
+
+    const [introSpring, setIntroSpring] = useSpring(() => ({
+      scale: [1,1,1],
+      config: config.wobbly
+    }))
+
+    const [contactsSpring, setContactsSpring] = useSpring(() => ({
+      scale: [1,1,1],
+      rotation: [0,0,0],
+      position: [0,0,0],
+      onRest: () => setContactsSpring({rotation: [0,0,0]})
+    }))
+
+    const [projectsSpring, setProjectsSpring] = useSpring(() => ({
+      color: [10,0,100],
+      position:[0,0,0],
+      config: config.wobbly
+    })) 
+
+    const [skillsSpring, setSkillsSpring] = useSpring(() => ({
+      scale: [1.4,.6,1],
+      config: config.wobbly
+    })) 
+
+    const [interestsSpring, setInterestsSpring] = useSpring(() => ({
       scale: [1,1,1],
       config: config.wobbly
     })) 
@@ -64,45 +76,51 @@ function Meshes() {
 
     const vector2 = new Vector2(0,0)
 
+    const raycaster = new Raycaster()
+
+
     useFrame(({ camera }) => {
       raycaster.setFromCamera(vector2, camera);
 
       //intro
       const introIntersects = raycaster.intersectObject(introRef.current);
       if(introIntersects.length > 0) {
-        setSpring({ scale: [1.2, 1.2, 1.2]})
+        setIntroSpring({ scale: [1.2, 1.2, 1]})
       }else{
-        setSpring({ scale: [1,1,1]})   
+        setIntroSpring({ scale: [1,1,1]})
       }
 
-      //contact
-      const contactsIntersects = raycaster.intersectObject(introRef.current);
+      //contacts
+      const contactsIntersects = raycaster.intersectObject(contactsRef.current);
       if(contactsIntersects.length > 0) {
-
+        // setContactsSpring({rotation: [0,0,Math.PI*.01*(Math.random()-.5)]})
+        setContactsSpring({position: [0,5,0]})
       }else{
-
+        setContactsSpring({position: [0,0,0]})
       }
 
       //projects
-      const projectsIntersects = raycaster.intersectObject(introRef.current);
+      const projectsIntersects = raycaster.intersectObject(projectsRef.current);
       if(projectsIntersects.length > 0) {
-
+        // console.log('projects intersecting')
+        // setProjectsSpring({opacity:1})
+        setProjectsSpring({color:[10,0,100], position: [0,-10,0]})
       }else{
-
+        setProjectsSpring({color:[0,0,0], position: [0,0,0]})
       }
 
 
       //skills
-      const skillsIntersects = raycaster.intersectObject(introRef.current);
+      const skillsIntersects = raycaster.intersectObject(skillsRef.current);
       if(skillsIntersects.length > 0) {
-        
+        setSkillsSpring({scale:[1,1,1], opacity:1})
       }else{
-           
+        setSkillsSpring({scale:[1,.7,1], opacity:0})
       }
 
 
       //interests
-      const interestsIntersects = raycaster.intersectObject(introRef.current);
+      const interestsIntersects = raycaster.intersectObject(interestsRef.current);
       if(interestsIntersects.length > 0) {
 
       }else{
@@ -125,16 +143,12 @@ function Meshes() {
 
 
         //INTRO 
-        <animated.group scale={spring.scale} ref={introRef}>
+        <animated.group scale={introSpring.scale} ref={introRef}>
           <animated.mesh 
-          ref={meshRef} 
           position={[-60,-10,-90]}
-          // scale={scale}
-          onClick={()=> setIntersecting(!intersecting)}
           rotation={[0,Math.PI*.2,Math.PI]}>
             <planeGeometry args={[120,150,10,10]}/>
             <shaderMaterial
-            ref={materialRef}
             attach="material"
             side={DoubleSide}
             transparent={true}
@@ -160,13 +174,13 @@ function Meshes() {
 
           </animated.mesh>
 
-          <Image 
+          {/* <Image 
           url="/images/me.png"
           position={[-60,20,-87]} rotation={[0,Math.PI*.2,0]} 
           scale={91}
           transparent
           onClick={()=>console.log('clicked')}
-          />
+          /> */}
 
           <Text 
           color={[.8,.8,.8]}
@@ -191,12 +205,20 @@ function Meshes() {
 
 
         //CONTACT DETAILS
-        <animated.group ref={contactsRef}>
+        <animated.group position={contactsSpring.position} rotation={contactsSpring.rotation} ref={contactsRef} >
           <mesh position={[50,-10,-70]} rotation={[0,Math.PI*-.2,0]}>
             <planeGeometry args={[80,30,10,10]}/>
             <meshStandardMaterial
             toneMapped={false} side={DoubleSide}
             color={[0,0,100]} transparent opacity={.5}
+            />
+          </mesh>
+
+          //invisible mesh for the raycaster
+          <mesh position={[50,-10,-72]} rotation={[0,Math.PI*-.2,0]}>
+            <planeGeometry args={[80,100,10,10]}/>
+            <meshStandardMaterial
+            color={[0,0,100]} transparent opacity={0}
             />
           </mesh>
 
@@ -214,12 +236,22 @@ function Meshes() {
 
 
         //PROJECTS
-        <animated.group ref={projectsRef}>
+        <animated.group position={projectsSpring.position} scale={projectsSpring.scale} ref={projectsRef}>
           <mesh position={[110,40,40]} rotation={[0,Math.PI*-.6,0]}>
             <planeGeometry args={[130,40,10,10]}/>
-            <meshStandardMaterial
+            <animated.meshStandardMaterial
             toneMapped={false} side={DoubleSide}
-            color={[10,0,100]} transparent opacity={.1}
+            // color={[10,0,100]}
+            color={projectsSpring.color}
+            transparent opacity={projectsSpring.opacity}
+            />
+          </mesh>
+
+          //invisible mesh for the raycaster
+          <mesh position={[112,0,40]} rotation={[0,Math.PI*-.6,0]}>
+            <planeGeometry args={[130,200,10,10]}/>
+            <meshStandardMaterial
+            color={[10,0,100]} transparent opacity={0}
             />
           </mesh>
 
@@ -239,11 +271,17 @@ function Meshes() {
 
 
         //SKILLS
-        <animated.group ref={skillsRef}>
+        <animated.group ref={skillsRef} scale={skillsSpring.scale}>
           <mesh position={[-47,10,124]} rotation={[Math.PI*0,Math.PI*-0.1,Math.PI*0]}>
               <planeGeometry args={[75,115,100,100]}/>
               <meshStandardMaterial color={[0,.1,9]} toneMapped={false} transparent opacity={.9} side={DoubleSide} 
-              // wireframe={true}  
+              />
+          </mesh>
+
+          //invisible mesh
+          <mesh position={[-47,10,124]} rotation={[Math.PI*0,Math.PI*-0.1,Math.PI*0]}>
+              <planeGeometry args={[130,150,100,100]}/>
+              <meshStandardMaterial color={[0,.1,9]} toneMapped={false} transparent opacity={0} side={DoubleSide} 
               />
           </mesh>
 
@@ -289,7 +327,7 @@ function Meshes() {
           onClick={()=>console.log('clicked')} /> */}
 
 
-          <Text color={new Color(100,0,1)} emissive={'purple'} position={[-70,99,20]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.3]} fontSize={8}>
+          {/* <Text color={new Color(100,0,1)} emissive={'purple'} position={[-70,99,20]} rotation={[Math.PI*0.5,Math.PI*0,Math.PI*0.3]} fontSize={8}>
             OTHER INTERESTS
           </Text>
 
@@ -302,18 +340,18 @@ function Meshes() {
               {'\n'}{'\n'}SWIMMING
               {'\n'}{'\n'}TRAVELING
 
-          </Text>
+          </Text> */}
         </animated.group>
 
 
 
 
         <Sparkles
-        count={50}
-        speed={1}
-        opacity={10}
-        size={4}
-        scale={300}
+        count={30}
+        speed={5}
+        opacity={25}
+        size={1}
+        scale={350}
         />
 
 

@@ -51,7 +51,7 @@ export default function Scene() {
     <Suspense fallback={null}>
       <Canvas shadows  style={{background:"black", height: '100vh'}} frameloop='demand' >
 
-        <axesHelper args={[1.5]}/>
+        <axesHelper args={[1.5]} />
         <OrbitControls />
         <Environment />
         <Lights />
