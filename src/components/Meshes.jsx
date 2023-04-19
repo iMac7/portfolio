@@ -94,7 +94,7 @@ function Meshes() {
       const contactsIntersects = raycaster.intersectObject(contactsRef.current);
       if(contactsIntersects.length > 0) {
         // setContactsSpring({rotation: [0,0,Math.PI*.01*(Math.random()-.5)]})
-        setContactsSpring({position: [0,5,0]})
+        setContactsSpring({position: [0,5,0], scale: [1,1,1]})
       }else{
         setContactsSpring({position: [0,0,0]})
       }
@@ -205,7 +205,9 @@ function Meshes() {
 
 
         //CONTACT DETAILS
-        <animated.group position={contactsSpring.position} rotation={contactsSpring.rotation} ref={contactsRef} >
+        <animated.group 
+        onClick={() => setContactsSpring({scale: [1.2,1.2,1]})} 
+        position={contactsSpring.position} rotation={contactsSpring.rotation} ref={contactsRef} >
           <mesh position={[50,-10,-70]} rotation={[0,Math.PI*-.2,0]}>
             <planeGeometry args={[80,30,10,10]}/>
             <meshStandardMaterial
