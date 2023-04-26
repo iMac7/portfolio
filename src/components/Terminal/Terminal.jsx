@@ -1,10 +1,20 @@
-import { useEffect, useState } from 'react'
-import styles from './Terminal.module.css' 
+import { useEffect, useState, useRef } from 'react'
+import styles from './Terminal.module.css'
+import { useRouter } from 'next/router'
+import { useTransition } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Sparkles } from '@react-three/drei'
+import { EffectComposer, Glitch } from '@react-three/postprocessing'
+import { Vector2 } from 'three'
+import { GlitchMode } from 'postprocessing'
 
-function Terminal() {
+
+export default function Terminal() {
   const [text, setText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
   const message = 'whoami'
+
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -23,9 +33,40 @@ function Terminal() {
   }, [isTyping]);
 
 
+  const router = useRouter()
+
+  useEffect(() => {
+    router.prefetch('/scene')
+  }, [router])
+  
+
+  if(isTyping===false) {
+    setTimeout(() => {
+      setLoading(true)
+      setTimeout(() => {
+        router.push('/scene')    
+      }, 4000);
+    }, 4000);
+  }
+
+  const [active, setActive] = useState(false)
+  
+
+  useEffect(() => {
+    const interval = setInterval(() => setActive(!active), 1000)
+  
+    return () => {
+      clearInterval(interval)
+    }
+  }, [active])
+  
+
+
   return (
+    <>
+    {!loading ?
     <div className={styles.main}>
-        <div className={styles.terminal}>
+        <div className={`${styles.terminal} ${!loading && styles.visible}`}>
 
           <nav>
             <div className={styles.head}>
@@ -72,8 +113,41 @@ function Terminal() {
           </div>
 
         </div>
+
+    </div>:
+
+    <>
+    <div className={styles.loader}>
+      <span>Loading</span>
+      <span className={active && styles.active}>...</span>
     </div>
+
+    <Canvas className={styles.canvas} style={{height: '100vh'}} >
+
+      <EffectComposer multisampling={0}>
+        <Glitch
+        delay={[.5, 1]} 
+        duration={[0.1, 0.5]} 
+        mode={GlitchMode.SPORADIC}
+        active 
+        ratio={0.85}
+        chromaticAberrationOffset={new Vector2(.5, .5)}
+        columns={.1}
+        />
+      </EffectComposer>
+
+      <Sparkles 
+      count={50}
+      scale={7}
+      // noise={[5,1,0]}
+      size={1}
+      speed={.5}
+      />
+
+    </Canvas>
+    
+    </>}
+    </>
   )
 }
 
-export default Terminal

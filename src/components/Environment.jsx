@@ -3,7 +3,6 @@ import { BackSide, TextureLoader } from 'three'
 
 export default function Environment() {
   const worldTexture = useLoader(TextureLoader, '/envMaps/room.jpg')
-  // const [worldTexture, progress] = useLoader(TextureLoader, '/envMaps/room.jpg')
   
   return (
       <mesh rotation={[0,Math.PI*.9,0]}>

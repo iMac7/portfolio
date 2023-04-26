@@ -29,11 +29,11 @@ export default function Projects() {
                 style={{transform: `translateX(calc(10vw - ${focused * 10}vw)`}}
                 >
                 {values.map((value, index) => 
-                <img 
+                <div 
                 key={index} className={`${index===focused? styles.focused: styles.unfocused}`}
-                src='/images/ars.jpg'
                 onClick={() => setFocused(index)} 
-                />
+                >
+                </div>
                 )}
             </div>
 
@@ -42,6 +42,3 @@ export default function Projects() {
     </div>
   )
 }
-
-//focused always central
-//transform left by 1 small img

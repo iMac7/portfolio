@@ -4,7 +4,7 @@ import { MeshReflectorMaterial, Stars, useGLTF, MeshRefractionMaterial, Image, T
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useSpring, animated, config} from '@react-spring/three'
 
-function Meshes() {
+export default function Meshes() {
     const diamondRef = useRef()
     const { nodes } = useGLTF('/models/diamond.glb')
 
@@ -15,8 +15,8 @@ function Meshes() {
     const [opacity, setOpacity] = useState(0)
       
     // useFrame(state => {
-          // diamondRef.current.rotation.y += .01
-      // })
+    //       diamondRef.current.rotation.y += .01
+    //   })
       
 
     useEffect(() => {
@@ -93,8 +93,7 @@ function Meshes() {
       //contacts
       const contactsIntersects = raycaster.intersectObject(contactsRef.current);
       if(contactsIntersects.length > 0) {
-        // setContactsSpring({rotation: [0,0,Math.PI*.01*(Math.random()-.5)]})
-        setContactsSpring({position: [0,5,0], scale: [1,1,1]})
+        setContactsSpring({position: [0,10,0], scale: [1,1,1]})
       }else{
         setContactsSpring({position: [0,0,0]})
       }
@@ -102,8 +101,6 @@ function Meshes() {
       //projects
       const projectsIntersects = raycaster.intersectObject(projectsRef.current);
       if(projectsIntersects.length > 0) {
-        // console.log('projects intersecting')
-        // setProjectsSpring({opacity:1})
         setProjectsSpring({color:[10,0,100], position: [0,-10,0]})
       }else{
         setProjectsSpring({color:[0,0,0], position: [0,0,0]})
@@ -137,7 +134,7 @@ function Meshes() {
         //Diamond
         {/* <mesh position={[0,0,0]} ref={diamondRef} geometry={nodes.Diamond_1_0.geometry} scale={[5,5,5]}>
             <MeshRefractionMaterial wireframe={false} envMap={worldTexture} toneMapped={false}
-            //  color={[1,1,4]}
+             color={[1,1,4]}
               />
         </mesh> */}
 
@@ -360,5 +357,3 @@ function Meshes() {
     </>
   )
 }
-
-export default Meshes

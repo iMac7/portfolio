@@ -1,13 +1,12 @@
-import { Suspense, useEffect, useRef, useState } from 'react'
+import { Suspense, useRef } from 'react'
 import { Canvas } from '@react-three/fiber'
-import Effects from '@/components/Effects'
-import Lights from '@/components/Lights'
-import Meshes from '@/components/Meshes'
-import Cameras from '@/components/Cameras'
-import Environment from '@/components/Environment'
-import Fallback from '@/components/Loader'
-import Loader from '@/components/Loader'
 import { OrbitControls } from '@react-three/drei'
+import Effects from './Effects'
+import Lights from './Lights'
+import Meshes from './Meshes'
+import Cameras from './Cameras'
+import Environment from './Environment'
+// import Fallback from './Loader'
 
 
 export default function Scene() {
