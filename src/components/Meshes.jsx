@@ -228,7 +228,6 @@ export default function Meshes({setContactsPosition}) {
             <planeGeometry args={[130,40,10,10]}/>
             <animated.meshStandardMaterial
             toneMapped={false} side={DoubleSide}
-            // color={[10,0,100]}
             color={projectsSpring.color}
             transparent opacity={projectsSpring.opacity}
             />
@@ -273,7 +272,6 @@ export default function Meshes({setContactsPosition}) {
           <Text position={[-50,50,120]} rotation={[Math.PI*0,Math.PI*.9,Math.PI*0]} fontSize={9}>
               SKILLS
           </Text>
-          {/* {new Color(100,1,1)} */}
           <Text color={[100,100,100]} position={[-50,10,120]} rotation={[Math.PI*0,Math.PI*.9,Math.PI*0]} fontSize={5}>
               {'\n'}&gt;&nbsp;HTML
               {'\n'}&gt;&nbsp;CSS
