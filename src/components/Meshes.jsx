@@ -242,7 +242,6 @@ export default function Meshes({setContactsPosition}) {
               />
           </mesh>
 
-          //invisible mesh
           <mesh position={[-47,10,124]} rotation={[Math.PI*0,Math.PI*-0.1,Math.PI*0]}>
               <planeGeometry args={[130,150,100,100]}/>
               <meshStandardMaterial color={[0,.1,9]} toneMapped={false} transparent opacity={0} side={DoubleSide} 
