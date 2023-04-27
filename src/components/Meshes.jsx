@@ -75,7 +75,6 @@ export default function Meshes({setContactsPosition}) {
     useFrame(({ camera }) => {
       raycaster.setFromCamera(vector2, camera);
 
-      //intro
       const introIntersects = raycaster.intersectObject(introRef.current);
       if(introIntersects.length > 0) {
         setIntroSpring({ scale: [1.2, 1.2, 1]})
@@ -83,7 +82,6 @@ export default function Meshes({setContactsPosition}) {
         setIntroSpring({ scale: [1,1,1]})
       }
 
-      //contacts
       const contactsIntersects = raycaster.intersectObject(contactsRef.current);
       if(contactsIntersects.length > 0) {
         setContactsSpring({position: [0,10,0], scale: [1,1,1]})
@@ -91,7 +89,6 @@ export default function Meshes({setContactsPosition}) {
         setContactsSpring({position: [0,0,0]})
       }
 
-      //projects
       const projectsIntersects = raycaster.intersectObject(projectsRef.current);
       if(projectsIntersects.length > 0) {
         setProjectsSpring({color:[10,0,100], position: [0,-10,0]})
@@ -100,7 +97,6 @@ export default function Meshes({setContactsPosition}) {
       }
 
 
-      //skills
       const skillsIntersects = raycaster.intersectObject(skillsRef.current);
       if(skillsIntersects.length > 0) {
         setSkillsSpring({scale:[1,1,1], opacity:1})
@@ -109,27 +105,11 @@ export default function Meshes({setContactsPosition}) {
       }
 
 
-      //interests
-      // const interestsIntersects = raycaster.intersectObject(interestsRef.current);
-      // if(interestsIntersects.length > 0) {
-
-      // }else{
-
-      // }
-
-
-
     })
 
 
   return (
     <>  
-        {/* <mesh position={[0,0,0]} ref={diamondRef} geometry={nodes.Diamond_1_0.geometry} scale={[5,5,5]}>
-            <MeshRefractionMaterial wireframe={false} envMap={worldTexture} toneMapped={false}
-             color={[1,1,4]}
-              />
-        </mesh> */}
-
 
         <animated.group scale={introSpring.scale} ref={introRef}>
           <animated.mesh 
@@ -275,7 +255,7 @@ export default function Meshes({setContactsPosition}) {
           <Text color={[100,100,100]} position={[-50,10,120]} rotation={[Math.PI*0,Math.PI*.9,Math.PI*0]} fontSize={5}>
               {'\n'}&gt;&nbsp;HTML
               {'\n'}&gt;&nbsp;CSS
-              {'\n'}&gt;&nbsp;SASS
+              {'\n'}&gt;&nbsp;MATERIAL UI
               {'\n'}&gt;&nbsp;JAVASCRIPT
               {'\n'}&gt;&nbsp;TYPESCRIPT
               {'\n'}&gt;&nbsp;REACT
