@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import styles from './Projects.module.css'
 
-export default function Projects() {
+export default function Projects({position, setPosition}) {
     const values = [1,2,3,4,5,6]
 
     const [focused, setFocused] = useState(0)
@@ -19,7 +19,8 @@ export default function Projects() {
 
 
   return (
-    <div className={styles.outer}>
+    <div className={styles.outer} style={{bottom: position}}
+    onClick={setPosition}>
 
         <div className={styles.carousel}>
             <button className={styles.left} onClick={() => handleClick('left')}>&lt;</button>

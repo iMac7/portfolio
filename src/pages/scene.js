@@ -8,26 +8,39 @@ import Environment from '@/components/Environment'
 import Fallback from '@/components/Loader'
 import Loader from '@/components/Loader'
 import { OrbitControls } from '@react-three/drei'
+import Contacts from '@/components/Contacts/Contacts'
+import Projects from '@/components/Projects/Projects'
 
 
 export default function Scene() {
+  const [contactsPosition, setContactsPosition] = useState('-100%')
+  function handleContactsPosition () {
+    contactsPosition === '-100%'? setContactsPosition(0) : setContactsPosition('-100%')
+  }
+
+  const [projectsPosition, setProjectsPosition] = useState('-100%')
+  function handleProjectsPosition () {
+    projectsPosition === '-100%'? setProjectsPosition(0) : setProjectsPosition('-100%')
+  }
 
   return (
     <>
     <Suspense fallback={<h2>Loading...</h2>}>
       <Canvas shadows style={{background:"black", height: '100vh'}} frameloop='demand' >
 
-        <axesHelper args={[1.5]} />
         <OrbitControls />
         <Environment />
         <Lights />
         <Cameras />
         <Effects />
-        <Meshes />
+        <Meshes setContactsPosition={handleContactsPosition} />
 
       </Canvas>
     </Suspense>
 
+    <Contacts position={contactsPosition} setPosition={handleContactsPosition} />
+
+    <Projects position={projectsPosition} setPosition={handleProjectsPosition} />
 
     </>
   )

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './Contacts.module.css'
 
-function Contacts() {
+function Contacts({position, setPosition}) {
   
   const [copiedItem, setCopiedItem ] = useState(null)
   
@@ -74,7 +74,7 @@ function Contacts() {
   }
 
   return (
-    <div className={styles.outer}>
+    <div className={styles.outer} style={{top: position}} onClick={setPosition} >
 
       <div className={`${styles.card} ${styles.gradient}`}>
         <h2 className={styles.header}>CONTACT ME</h2>

@@ -4,20 +4,13 @@ import { MeshReflectorMaterial, Stars, useGLTF, MeshRefractionMaterial, Image, T
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useSpring, animated, config} from '@react-spring/three'
 
-export default function Meshes() {
-    const diamondRef = useRef()
-    const { nodes } = useGLTF('/models/diamond.glb')
+export default function Meshes({setContactsPosition}) {
 
     const [text, setText] = useState('');
     const [isTyping, setIsTyping] = useState(true);
     const message = 'IAN MACHARIA'
 
-    const [opacity, setOpacity] = useState(0)
-      
-    // useFrame(state => {
-    //       diamondRef.current.rotation.y += .01
-    //   })
-      
+    const [opacity, setOpacity] = useState(0)      
 
     useEffect(() => {
       const interval = setInterval(() => {
@@ -117,12 +110,12 @@ export default function Meshes() {
 
 
       //interests
-      const interestsIntersects = raycaster.intersectObject(interestsRef.current);
-      if(interestsIntersects.length > 0) {
+      // const interestsIntersects = raycaster.intersectObject(interestsRef.current);
+      // if(interestsIntersects.length > 0) {
 
-      }else{
+      // }else{
 
-      }
+      // }
 
 
 
@@ -131,7 +124,6 @@ export default function Meshes() {
 
   return (
     <>  
-        //Diamond
         {/* <mesh position={[0,0,0]} ref={diamondRef} geometry={nodes.Diamond_1_0.geometry} scale={[5,5,5]}>
             <MeshRefractionMaterial wireframe={false} envMap={worldTexture} toneMapped={false}
              color={[1,1,4]}
@@ -139,7 +131,6 @@ export default function Meshes() {
         </mesh> */}
 
 
-        //INTRO 
         <animated.group scale={introSpring.scale} ref={introRef}>
           <animated.mesh 
           position={[-60,-10,-90]}
@@ -201,9 +192,8 @@ export default function Meshes() {
 
 
 
-        //CONTACT DETAILS
         <animated.group 
-        onClick={() => setContactsSpring({scale: [1.2,1.2,1]})} 
+        onClick={setContactsPosition}
         position={contactsSpring.position} rotation={contactsSpring.rotation} ref={contactsRef} >
           <mesh position={[50,-10,-70]} rotation={[0,Math.PI*-.2,0]}>
             <planeGeometry args={[80,30,10,10]}/>
@@ -213,7 +203,6 @@ export default function Meshes() {
             />
           </mesh>
 
-          //invisible mesh for the raycaster
           <mesh position={[50,-10,-72]} rotation={[0,Math.PI*-.2,0]}>
             <planeGeometry args={[80,100,10,10]}/>
             <meshStandardMaterial
@@ -234,7 +223,6 @@ export default function Meshes() {
 
 
 
-        //PROJECTS
         <animated.group position={projectsSpring.position} scale={projectsSpring.scale} ref={projectsRef}>
           <mesh position={[110,40,40]} rotation={[0,Math.PI*-.6,0]}>
             <planeGeometry args={[130,40,10,10]}/>
@@ -246,7 +234,6 @@ export default function Meshes() {
             />
           </mesh>
 
-          //invisible mesh for the raycaster
           <mesh position={[112,0,40]} rotation={[0,Math.PI*-.6,0]}>
             <planeGeometry args={[130,200,10,10]}/>
             <meshStandardMaterial
@@ -269,7 +256,6 @@ export default function Meshes() {
 
 
 
-        //SKILLS
         <animated.group ref={skillsRef} scale={skillsSpring.scale}>
           <mesh position={[-47,10,124]} rotation={[Math.PI*0,Math.PI*-0.1,Math.PI*0]}>
               <planeGeometry args={[75,115,100,100]}/>
@@ -314,7 +300,6 @@ export default function Meshes() {
 
 
 
-        //INTERESTS
         <animated.group ref={interestsRef}>
           {/* <Image 
           url="/images/arsenal.png"

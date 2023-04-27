@@ -119,7 +119,7 @@ export default function Terminal() {
     <>
     <div className={styles.loader}>
       <span>Loading</span>
-      <span className={active && styles.active}>...</span>
+      <span className={active? styles.active: undefined}>...</span>
     </div>
 
     <Canvas className={styles.canvas} style={{height: '100vh'}} >
