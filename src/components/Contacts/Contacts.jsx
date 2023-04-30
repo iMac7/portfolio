@@ -76,7 +76,7 @@ function Contacts({position, setPosition}) {
   return (
     <div className={styles.outer} style={{top: position}} onClick={setPosition} >
 
-      <div className={`${styles.card} ${styles.gradient}`}>
+      <div className={`${styles.card} ${styles.gradient}`} onClick={(e) => e.stopPropagation()}>
         <h2 className={styles.header}>CONTACT ME</h2>
 
         {links.map((link, index) => 
