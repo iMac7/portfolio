@@ -1,12 +1,7 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './Terminal.module.css'
 import { useRouter } from 'next/router'
-import { useTransition } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
-import { Sparkles } from '@react-three/drei'
-import { EffectComposer, Glitch } from '@react-three/postprocessing'
-import { Vector2 } from 'three'
-import { GlitchMode } from 'postprocessing'
+import Loader from '../Loader/Loader'
 
 
 export default function Terminal() {
@@ -44,7 +39,7 @@ export default function Terminal() {
     setTimeout(() => {
       setLoading(true)
       setTimeout(() => {
-        router.push('/scene')    
+        router.push('/scene') 
       }, 4000);
     }, 4000);
   }
@@ -116,37 +111,7 @@ export default function Terminal() {
 
     </div>:
 
-    <>
-    <div className={styles.loader}>
-      <span>Loading</span>
-      <span className={active? styles.active: undefined}>...</span>
-    </div>
-
-    <Canvas className={styles.canvas} style={{height: '100vh'}} >
-
-      <EffectComposer multisampling={0}>
-        <Glitch
-        delay={[.5, 1]} 
-        duration={[0.1, 0.5]} 
-        mode={GlitchMode.SPORADIC}
-        active 
-        ratio={0.85}
-        chromaticAberrationOffset={new Vector2(.5, .5)}
-        columns={.1}
-        />
-      </EffectComposer>
-
-      <Sparkles 
-      count={50}
-      scale={7}
-      // noise={[5,1,0]}
-      size={1}
-      speed={.5}
-      />
-
-    </Canvas>
-    
-    </>}
+    <Loader />}
     </>
   )
 }

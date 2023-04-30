@@ -5,11 +5,11 @@ import Lights from '@/components/Lights'
 import Meshes from '@/components/Meshes'
 import Cameras from '@/components/Cameras'
 import Environment from '@/components/Environment'
-import Fallback from '@/components/Loader'
-import Loader from '@/components/Loader'
 import { OrbitControls } from '@react-three/drei'
 import Contacts from '@/components/Contacts/Contacts'
 import Projects from '@/components/Projects/Projects'
+import Loader from '@/components/Loader/Loader'
+
 
 
 export default function Scene() {
@@ -25,7 +25,7 @@ export default function Scene() {
 
   return (
     <>
-    <Suspense fallback={<h2>Loading...</h2>}>
+    <Suspense fallback={<Loader/>}>
       <Canvas shadows style={{background:"black", height: '100vh'}} frameloop='demand' >
 
         <OrbitControls enableZoom={false} />
