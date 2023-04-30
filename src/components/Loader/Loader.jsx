@@ -41,7 +41,7 @@ function Loader() {
         speed={.5}
         />
 
-        </Canvas>
+    </Canvas>
 
     </>
   )

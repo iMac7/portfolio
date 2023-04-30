@@ -29,7 +29,12 @@ export default function Scene() {
       <Canvas shadows style={{background:"black", height: '100vh'}} frameloop='demand' >
 
         <OrbitControls enableZoom={false} />
-        <Environment />
+
+        <Suspense fallback={null} >
+          <Environment />
+        </Suspense>
+        
+
         <Lights />
         <Cameras />
         <Effects />
