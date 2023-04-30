@@ -105,17 +105,3 @@
     background-color: rgba(10, 227, 238, .5);
     transition: 300ms;
 }
-
-
-
-/* @keyframes moveGradient {
-    from {background-position: left;}
-    to {background-position: right;}
-}
-  
-.gradient {
-    height: 30px;
-    background: linear-gradient(to bottom right, red, transparent);
-    background-size: 400% 400%;
-    animation: moveGradient 1s linear infinite;
-} */

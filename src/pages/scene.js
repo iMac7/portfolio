@@ -28,7 +28,7 @@ export default function Scene() {
     <Suspense fallback={<h2>Loading...</h2>}>
       <Canvas shadows style={{background:"black", height: '100vh'}} frameloop='demand' >
 
-        <OrbitControls />
+        <OrbitControls enableZoom={false} />
         <Environment />
         <Lights />
         <Cameras />

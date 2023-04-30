@@ -15,7 +15,7 @@ function Cameras() {
   
 
   return (
-    <PerspectiveCamera makeDefault fov={60} zoom={zoom} position={[42,-1,65]} />
+    <PerspectiveCamera makeDefault fov={62} zoom={zoom} position={[46.7,6,61]} />
     )
 }
 
