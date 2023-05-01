@@ -1,5 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import styles from './Projects.module.css'
+import Image from 'next/image'
+import myimg from '/public/images/ars.jpg'
 
 export default function Projects({position, setPosition}) {
     const values = [1,2,3,4,5,6]
@@ -26,14 +28,18 @@ export default function Projects({position, setPosition}) {
             <button className={styles.left} onClick={() => handleClick('left')}>&lt;</button>
             <button className={styles.right} onClick={() => handleClick('right')}>&gt;</button>
 
-            <div className={styles.images}
-                style={{transform: `translateX(calc(10vw - ${focused * 10}vw)`}}
-                >
+            <div className={styles.images} style={{transform: `translateX(calc(10vw - ${focused * 10}vw)`}}>
                 {values.map((value, index) => 
                 <div 
-                key={index} className={`${index===focused? styles.focused: styles.unfocused}`}
-                onClick={() => setFocused(index)} 
-                >
+                key={index} className={`${index===focused? styles.focused: styles.unfocused} ${styles.project}`}
+                onClick={() => setFocused(index)} >
+
+                    <Image 
+                    src={myimg}
+                    alt='image here'
+                    fill
+                    />
+
                 </div>
                 )}
             </div>

@@ -78,6 +78,7 @@
     border: 1px solid white;
     filter: grayscale();
     background-color: black;
+    overflow-y: auto;
 }
 
 .unfocused {

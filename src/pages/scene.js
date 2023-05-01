@@ -44,7 +44,7 @@ export default function Scene() {
 
     <Contacts position={contactsPosition} setPosition={handleContactsPosition} />
 
-    <Projects position={projectsPosition} setPosition={handleProjectsPosition} />
+    {/* <Projects position={projectsPosition} setPosition={handleProjectsPosition} /> */}
 
     </>
   )
