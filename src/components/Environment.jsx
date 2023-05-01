@@ -1,8 +1,8 @@
 import { useLoader } from '@react-three/fiber'
 import { BackSide, TextureLoader } from 'three'
 
-export default function Environment() {
-  const worldTexture = useLoader(TextureLoader, '/envMaps/room.jpg')
+export default function Environment({url}) {
+  const worldTexture = useLoader(TextureLoader, url)
   
   return (
       <mesh rotation={[0,Math.PI*.9,0]}>

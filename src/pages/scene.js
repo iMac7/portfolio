@@ -30,11 +30,10 @@ export default function Scene() {
 
         <OrbitControls enableZoom={false} />
 
-        <Suspense fallback={null} >
-          <Environment />
+        <Suspense fallback={<Environment url={'/envMaps/room_optimized.jpg'} />} >
+          <Environment url={'/envMaps/room.jpg'} />
         </Suspense>
         
-
         <Lights />
         <Cameras />
         <Effects />
