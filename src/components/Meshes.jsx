@@ -4,7 +4,7 @@ import { MeshReflectorMaterial, Stars, useGLTF, MeshRefractionMaterial, Image, T
 import { useFrame, useLoader } from "@react-three/fiber"
 import { useSpring, animated, config} from '@react-spring/three'
 
-export default function Meshes({setContactsPosition}) {
+export default function Meshes({setContactsPosition, setProjectsPosition}) {
 
     const [text, setText] = useState('');
     const [isTyping, setIsTyping] = useState(true);
@@ -203,7 +203,8 @@ export default function Meshes({setContactsPosition}) {
 
 
 
-        <animated.group position={projectsSpring.position} scale={projectsSpring.scale} ref={projectsRef}>
+        <animated.group position={projectsSpring.position} scale={projectsSpring.scale} ref={projectsRef}
+        onClick={setProjectsPosition}>
           <mesh position={[110,40,40]} rotation={[0,Math.PI*-.6,0]}>
             <planeGeometry args={[130,40,10,10]}/>
             <animated.meshStandardMaterial

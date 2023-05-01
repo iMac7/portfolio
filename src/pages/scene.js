@@ -18,9 +18,9 @@ export default function Scene() {
     contactsPosition === '-100%'? setContactsPosition(0) : setContactsPosition('-100%')
   }
 
-  const [projectsPosition, setProjectsPosition] = useState('-100%')
+  const [projectsPosition, setProjectsPosition] = useState('100%')
   function handleProjectsPosition () {
-    projectsPosition === '-100%'? setProjectsPosition(0) : setProjectsPosition('-100%')
+    projectsPosition === '100%'? setProjectsPosition(0) : setProjectsPosition('100%')
   }
 
   return (
@@ -37,14 +37,14 @@ export default function Scene() {
         <Lights />
         <Cameras />
         <Effects />
-        <Meshes setContactsPosition={handleContactsPosition} />
+        <Meshes setContactsPosition={handleContactsPosition} setProjectsPosition={handleProjectsPosition} />
 
       </Canvas>
     </Suspense>
 
     <Contacts position={contactsPosition} setPosition={handleContactsPosition} />
 
-    {/* <Projects position={projectsPosition} setPosition={handleProjectsPosition} /> */}
+    <Projects position={projectsPosition} setPosition={handleProjectsPosition} />
 
     </>
   )

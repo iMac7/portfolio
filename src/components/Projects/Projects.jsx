@@ -19,8 +19,8 @@ export default function Projects({position, setPosition}) {
 
 
   return (
-    <div className={styles.outer} style={{bottom: position}}
-    onClick={setPosition}>
+    <div className={styles.outer} style={{left: position}}>
+        <button className={styles.cancel} onClick={setPosition}>x</button>
 
         <div className={styles.carousel}>
             <button className={styles.left} onClick={() => handleClick('left')}>&lt;</button>
