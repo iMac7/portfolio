@@ -37,7 +37,7 @@ export default function Projects({position, setPosition}) {
                     <Image 
                     src={myimg}
                     alt='image here'
-                    fill
+                    placeholder='blur'
                     />
 
                 </div>
