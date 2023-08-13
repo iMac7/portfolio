@@ -42,7 +42,7 @@ export default function Scene() {
       </Canvas>
     </Suspense>
 
-    <Contacts position={contactsPosition} setPosition={handleContactsPosition} />
+    {/* <Contacts position={contactsPosition} setPosition={handleContactsPosition} /> */}
 
     {/* <Projects position={projectsPosition} setPosition={handleProjectsPosition} /> */}
 
