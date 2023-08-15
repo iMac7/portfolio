@@ -33,6 +33,9 @@ varying vec3 v_normal;
 varying vec3 v_wind;
 
 uniform float time;
+uniform vec2 mouse;
+uniform vec2 touchPoint;
+uniform float touchStrength;
 
 void main() {
   vUv = uv;
@@ -40,12 +43,12 @@ void main() {
   vec3 finalPosition = position;
 
   vec3 wind = vec3(
-    fbm(.3 * position + .1 * time),
+    fbm(.1 * position + .1 * time),
     fbm(.2 * position + .2 * time),
-    fbm(.1 * position + .3 * time)
+    fbm(.1 * position + .1 * time)
   );
 
-  float wave = mix(-2.0, 2.0, .1 * fbm(position + wind));
+  float wave = mix(-2.0, 2.0, fbm(.1 * position + wind));
 
   vec2 peg1 = vec2(0.0, 1.0);
   vec2 peg2 = vec2(1.0,1.0);
@@ -55,8 +58,13 @@ void main() {
   float gravity = -0.2 * sin(uv.x);
 
   finalPosition.y += gravity;
+  finalPosition.z +=  tension * wave;
 
-  finalPosition.z +=  wave;
+
+  //touch depression
+  float mouseDistance = distance(touchPoint, uv);
+  float mouseScore = smoothstep(.2, 0.0, mouseDistance);
+  finalPosition.z += mix(0.0, -1.0 * touchStrength, tension * mouseScore);
 
   vec4 modelPosition = vec4(finalPosition, 1.0);
 
@@ -122,12 +130,12 @@ void main() {
   );
 
   vec3 rgb = addLight(l) * (img_color.rgb) - (v_wind) + .6;
-  // vec4 final_color = vec4(rgb, 1.0);
-  vec4 final_color = vec4(rgb, 1.0);
+  vec4 final_color = vec4(rgb.r - .2 * v_wind.r, rgb.g- .2 * v_wind.g, rgb.b- .2 * v_wind.b, 1.0);
+  // vec4 final_color = vec4(v_wind, 1.0);
 
-  if(distance(vUv, touchPoint) < .1) {
-    final_color = vec4(rgb.r - .1 * touchPoint.x, rgb.b - .1 * touchPoint.y, 1.0, 1.0);
-  }
+  // if(distance(vUv, touchPoint) < .1) {
+  //   final_color = vec4(rgb.r - .1 * touchPoint.x, rgb.b - .1 * touchPoint.y, 1.0, 1.0);
+  // }
 
   gl_FragColor = final_color;
 }
@@ -139,7 +147,7 @@ function Pic() {
     let texture;
     let loader;
     if (typeof window !== 'undefined') {
-      texture = useLoader(TextureLoader, '/images/ars.jpg')
+      texture = useLoader(TextureLoader, '/images/pic.jpg')
       loader = new TextureLoader()
     }
 
@@ -150,20 +158,29 @@ function Pic() {
         time: {value: 0},
         mouse: {value: 0},
         touchPoint: {value: {x:0, y:0}},
+        touchStrength: {value: 0},
+        touchStrengthAim: {value: 0},
       }),
       []
     );
 
     useFrame((state) => {
       const { clock, mouse, raycaster } = state;
-      meshRef.current.material.uniforms.time.value = clock.getElapsedTime();
-      meshRef.current.material.uniforms.mouse.value = mouse;
+      const uniforms = meshRef.current.material.uniforms
+      uniforms.time.value = clock.getElapsedTime();
+      uniforms.mouse.value = mouse;
 
       const intersects = raycaster.intersectObject(meshRef.current);
       if(intersects.length>0) {
-        // console.log('inters-', intersects)
-      meshRef.current.material.uniforms.touchPoint.value = intersects[0].uv
+        uniforms.touchPoint.value = intersects[0].uv
+        uniforms.touchStrengthAim.value = 1
       }
+      else {
+        uniforms.touchStrengthAim.value = 0
+      }
+      //fades out the touch depression
+      const diffStrength = (uniforms.touchStrengthAim.value - uniforms.touchStrength.value) * 0.025
+      uniforms.touchStrength.value = uniforms.touchStrength.value + diffStrength
     });  
 
    return (
@@ -173,9 +190,8 @@ function Pic() {
           uniforms={uniforms}
           vertexShader={vert}
           fragmentShader={frag}
-          // wireframe={true}
+          wireframe={true}
         />
-          {/* <meshBasicMaterial color={'red'} side={DoubleSide} map={texture} /> */}
           <planeGeometry args={[3,3, 120, 120]} />
         </mesh>
 
