@@ -1,25 +1,7 @@
-import { Suspense, useMemo, useRef, useState } from "react"
-import { Canvas, useFrame, useLoader } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
-import { Clock, DoubleSide, TextureLoader } from "three"
-import Flag from "@/components/Flag"
-import { fbm } from "../../public/shaders"
-
-export default function Wrapper() {
-  return (
-    <>
-      <Suspense fallback={null}>
-        <Canvas shadows style={{ background: "black", height: "100vh" }}>
-          <OrbitControls />
-
-          <axesHelper args={[10]} />
-
-          <Pic />
-        </Canvas>
-      </Suspense>
-    </>
-  )
-}
+import { useMemo, useRef } from "react"
+import { fbm } from "../../../public/shaders"
+import { DoubleSide, TextureLoader } from "three"
+import { useFrame, useLoader } from "@react-three/fiber"
 
 const vert = `
 ${fbm}
@@ -127,18 +109,18 @@ void main() {
   );
 
   vec3 rgb = addLight(l) * (img_color.rgb) - (v_wind) + .6;
-  vec4 final_color = vec4(rgb.r - .2 * v_wind.r, rgb.g- .2 * v_wind.g, rgb.b- .2 * v_wind.b, 1.0);
+  // vec4 final_color = vec4(rgb.r - .2 * v_wind.r, rgb.g- .2 * v_wind.g, rgb.b- .2 * v_wind.b, 1.0);
   // vec4 final_color = vec4(v_wind, 1.0);
 
   // if(distance(vUv, touchPoint) < .1) {
   //   final_color = vec4(rgb.r - .1 * touchPoint.x, rgb.b - .1 * touchPoint.y, 1.0, 1.0);
   // }
 
-  gl_FragColor = final_color;
+  gl_FragColor = vec4(img_color.rgb, 1.0);
 }
 `
 
-export function Pic() {
+export default function Pic() {
   const meshRef = useRef(null)
 
   let texture
@@ -181,15 +163,15 @@ export function Pic() {
 
   return (
     <>
-      <mesh key={Math.random()} ref={meshRef}>
+      <mesh position={[-2.5, 0.5, 4]} key={Math.random()} ref={meshRef}>
         <shaderMaterial
           side={DoubleSide}
           uniforms={uniforms}
           vertexShader={vert}
           fragmentShader={frag}
-          wireframe={true}
+          //   wireframe={true}
         />
-        <planeGeometry args={[3, 3, 120, 120]} />
+        <planeGeometry args={[6, 8, 120, 120]} />
       </mesh>
     </>
   )
