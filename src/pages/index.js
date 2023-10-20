@@ -22,16 +22,16 @@ export default function Intro() {
       })
     )
 
-    const projects = gsap.utils.toArray(".project")
-    const projectsAnimation = gsap.to(projects, {
-      xPercent: -100 * projects.length - 1,
+    const projectsContainer = document.querySelector(".projects")
+    const projectsAnimation = gsap.to(projectsContainer, {
+      xPercent: -100,
       ease: "none",
       scrollTrigger: {
-        trigger: ".projects",
+        trigger: div4ref.current,
         pin: true,
-        scrub: 1,
-        snap: 1 / (projects.length - 1),
-        end: () => "+=" + document.querySelector(".projects").offsetWidth,
+        scrub: true,
+        snap: 1 / (projectsContainer.children.length - 1),
+        end: () => "+=" + projectsContainer.offsetWidth,
       },
     })
 
@@ -66,93 +66,80 @@ export default function Intro() {
         <group></group>
       </Canvas>
 
-      <div className='me' style={{ background: "transparent", color: "black" }}>
+      <div ref={div1ref} style={{ height: "100vh", background: "transparent" }}>
+        pic
+      </div>
+      <div ref={div2ref} style={{ height: "100vh", background: "yellow" }}>
+        <h1>About div</h1>
+      </div>
+      <div ref={div3ref} style={{ height: "100vh", background: "blue" }}>
+        skills
+      </div>
+      <div
+        className='projects'
+        ref={div4ref}
+        style={{
+          background: "yellow",
+          display: "flex",
+          width: "400vw",
+        }}
+      >
         <div
-          ref={div1ref}
-          style={{ height: "100vh", background: "transparent" }}
-        >
-          {/* Add your picture here */}
-        </div>
-        <div ref={div2ref} style={{ height: "100vh", background: "yellow" }}>
-          <h1>About div</h1>
-        </div>
-        <div ref={div3ref} style={{ height: "100vh", background: "blue" }}>
-          {/* Add your skills here */}
-        </div>
-        <div
-          className='projects'
-          ref={div4ref}
+          className='project'
           style={{
-            background: "white",
-            // height: "100vh",
-            // width: "400vw",
-            // display: "flex",
-            // overflowX: "hidden",
-            borderTop: "2px solid red",
-            borderBottom: "2px solid red",
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
-          {/* Add your projects here */}
-          <div
-            className='project'
-            style={{
-              width: "100vw",
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderBottom: "1px solid black",
-            }}
-          >
-            <h1>Project 1</h1>
-          </div>
-          <div
-            className='project'
-            style={{
-              width: "100vw",
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderBottom: "1px solid black",
-              background: "red",
-            }}
-          >
-            <h1>Project 2</h1>
-          </div>
-          <div
-            className='project'
-            style={{
-              width: "100vw",
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderBottom: "1px solid black",
-            }}
-          >
-            <h1>Project 3</h1>
-          </div>
-          <div
-            className='project'
-            style={{
-              width: "100vw",
-              height: "100vh",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              borderBottom: "1px solid black",
-            }}
-          >
-            <h1>Project 4</h1>
-          </div>
+          <h1>Project 1</h1>
         </div>
         <div
-          ref={div5ref}
-          style={{ height: "100vh", background: "gray", color: "white" }}
+          className='project'
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "red",
+          }}
         >
-          <h1>Contact div</h1>
+          <h1>Project 2</h1>
         </div>
+        <div
+          className='project'
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <h1>Project 3</h1>
+        </div>
+        <div
+          className='project'
+          style={{
+            width: "100vw",
+            height: "100vh",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "green",
+          }}
+        >
+          <h1>Project 4</h1>
+        </div>
+      </div>
+      <div
+        ref={div5ref}
+        style={{ height: "100vh", background: "gray", color: "white" }}
+      >
+        <h1>Contact div</h1>
       </div>
     </>
   )
